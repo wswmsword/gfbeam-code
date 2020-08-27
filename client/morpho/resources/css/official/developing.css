@@ -1,0 +1,49 @@
+.developing {
+   cursor: not-allowed !important;
+}
+.radio-panel.developing {
+   background: #fde8e8;
+}
+.radio-panel.developing::before {
+   box-shadow: inset 0 0 0 5px #ff3265;
+   border: 2px solid #ff3265;
+}
+.radio-panel.developing:hover {
+   background: #fde8e8;
+}
+.radio-panel.developing:hover::before {
+   box-shadow: inset 0 0 0 5px #ff3265;
+   border: 2px solid #ff3265;
+}
+#control.developing {
+   background-color: #d84e3e;
+   border: 1px solid #d84e3e;
+   color: rgb(0, 230, 64);
+}
+#control.developing:hover {
+   background-color: #d84e3e;
+   border: 1px solid #d84e3e;
+   color: rgb(0, 230, 64);
+}
+.sub-item.developing {
+   color: white;
+   background-color: #d84e3e;
+   padding: 3px 6px;
+}
+
+.nav-item.developing {
+   font-size: 14px;
+   color: white;
+   background-color: #d84e3e;
+}
+
+.write.developing {
+   background-color: #d84e3e;
+   color: white;
+   box-shadow: none;
+}
+.write.developing:hover {
+   background-color: #d84e3e;
+   color: white;
+   box-shadow: none;
+}

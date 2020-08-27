@@ -1,0 +1,271 @@
+.content-holder {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   /* height: calc(100% - 56px); */
+   /* height: calc(100vh - 36px); */
+   flex-wrap: wrap;
+   flex-grow: 1;
+   /* max-height: 768px; */
+   overflow: scroll;
+}
+.content-holder > div {
+   
+   /* background-color: white;
+   border: 1px solid #f1f1f1; */
+   
+   /* margin: 17px; */
+}
+.project-holder {
+   position: relative;
+   height: 158px;
+   width: 158px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-right: 45px;
+   overflow: hidden;
+   /* cursor: pointer; */
+}
+.project-holder.selected {
+   border: 1px dashed rgb(236, 220, 204);
+   /* background-image: radial-gradient(rgb(95, 241, 137), #fffffffc); */
+   border-radius: 5px;
+}
+.project-holder.loading::after {
+   content:'';
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   z-index: 1;
+   animation:wait-detail 1.5s ease infinite;
+   cursor: wait;
+   /* background-color: rgba(255, 255, 255, 0.1); */
+}
+/* hover 时轻微缩小 */
+/* .project:hover img{
+   transform: scale(0.97);
+}
+.project:active img{
+   transform: scale(0.96);
+} */
+.effect-assis {
+   position: relative;
+   font-size: 0;
+}
+.effect-assis {
+   cursor: pointer;
+}
+.effect-assis::after{
+   content:'';
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   transition: background-color 0.6s ease;
+}
+.effect-assis:hover::after{
+   content:'';
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   z-index: 1;
+   transition: background-color 0s linear;
+   transform: scale(1.02);
+   background-color: rgba(255, 255, 255, 0.185);
+}
+.project {
+   transition: transform 0.3s linear;
+}
+
+.effect-assis:hover .project{
+   transform: scale(1.02);
+   transition: transform 0s;
+}
+.effect-assis:active .project {
+   transform: scale(0.98);
+}
+.project-holder.selected .effect-assis .project{
+   transform: scale(1);
+}
+.project-holder.selected .effect-assis:hover::after{
+   background-color: transparent;
+}
+
+/* 项目预览面板 */
+.scrollY {
+   position: absolute;
+   display: none;
+   width: 158px;
+   height: 158px;
+   overflow: scroll;
+   font-size: 16px;
+   color: white;
+   background-color: rgb(255, 251, 245);
+   z-index: 1;
+}
+.project-holder.selected .scrollY {
+   display: block;
+}
+.node-panel {
+   padding: 6px;
+}
+.preview-node {
+   display: inline-block;
+   font-size: 13px;
+   /* height: auto; */
+   background: rgb(248, 243, 234);
+   border: 1px solid rgb(224, 216, 199);
+   color: rgb(97, 76, 50);
+   padding: 3px 7px;
+   border-radius: 16px;
+   margin-left: 3px;
+   margin-bottom: 3px;
+}
+.button.detail-button {
+   display: block;
+   text-align: center;
+   padding: 0;
+   margin-left: 6px;
+   margin-right: 6px;
+   text-shadow: none;
+   line-height: 30px;
+   color: white;
+   background: rgb(189, 181, 163);
+   border: 1px solid rgb(189, 181, 163);
+   margin-top: 6px;
+   font-size: 14px;
+   border-radius: 4px;
+}
+.button.detail-button:hover {
+   box-shadow: inset 0 0 0 2px rgb(248, 243, 234), inset 0 0 0 3px rgb(139, 131, 113);
+   background-color: rgb(139, 131, 113);
+   border: 1px solid rgb(139, 131, 113);
+}
+.point-panel {
+   position: absolute;
+   display: flex;
+   top: 0;
+   right: 0;
+   width: auto;
+   flex-direction: row-reverse;
+   z-index: 0;
+   visibility: hidden;
+}
+.point-model {
+   width: 6px;
+   height: 6px;
+   border-radius: 50%;
+   background-color: rgb(154, 47, 255);
+   margin-left: 2px;
+}
+.story-type {
+   background-color: rgb(255, 151, 15);
+}
+.project-holder:hover .point-panel {
+   visibility: visible;
+}
+
+.sound-holder{
+   display: block;
+   width: 150px;
+   height: 150px;
+}
+.record {
+   display: block;
+   position: absolute;
+   width: 30px;
+   height: 30px;
+   border-radius: 50%;
+   background-color: rgb(51, 51, 51);
+   border: 1px solid black;
+   box-shadow: inset 0 0 0 1px rgb(126, 126, 126);
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+.record::before {
+   content: '';
+   width: 9px;
+   height: 9px;
+   border-radius: 50%;
+   background-color: red;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+.record::after {
+   content: '';
+   width: 4px;
+   height: 4px;
+   border-radius: 50%;
+   background-color: white;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+.sound-arm {
+   display: block;
+   width: 10px;
+   height: 4px;
+   border-radius: 2px;
+   background-color: rgb(56, 156, 98);
+   transform: rotate(45deg);
+   transform-origin: left;
+   position: absolute;
+   top: -2px;
+   left: 0;
+}
+.hole {
+   position: absolute;
+   display: block;
+   width: 2px;
+   height: 2px;
+   background-color: black;
+   /* border-radius: 50%; */
+   right: 0;
+   bottom: 0;
+}
+.hole::before, .hole::after {
+   content: '';
+   position: absolute;
+   width: 2px;
+   height: 2px;
+   background-color: black;
+   /* border-radius: 50%; */
+   left: -4px;
+}
+.hole::after {
+   left: -8px;
+}
+.hole.top {
+   bottom: 5px;
+}
+
+@media only screen and (max-width: 1024px) {
+   .content-holder {
+      /* display: block; */
+      flex-direction: row;
+      max-height: none;
+      justify-content: center;
+   }
+   .project-holder {
+      margin-top: 12px;
+      margin-right: 0;
+      width: 186px;
+      height: 186px;
+   }
+   .project-holder.selected {
+      border: none;
+   }
+   .project-holder.selected .scrollY {
+      border: 1px dashed rgb(236, 220, 204);
+   }
+}

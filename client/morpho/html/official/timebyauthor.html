@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en" class="white">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+   <title>记录光阴</title>
+   <link rel="stylesheet" href="../../../resources/css/official/reset.css">
+   <style>
+      .head-holder {
+         position: fixed;
+         display: flex;
+         /* justify-content: space-between; */
+         width: 100%;
+         top: 0;
+         background-color: transparent;
+         z-index: 1;
+         border-bottom: none;
+      }
+
+      .logo-holder {
+         background-color: transparent;
+         color: rgb(0, 230, 64);
+         font-size: 36px;
+         padding: 12px 28px;
+         /* color:  */
+      }
+
+      .logo {
+         vertical-align: middle;
+      }
+
+      .nav-holder {
+         border-bottom: none;
+      }
+
+      #title {
+         font-size: 36px;
+         margin-bottom: 18px;
+         margin-top: 21px;
+         padding: 0 18px;
+         line-height: 1;
+         text-shadow: 2px 1px 0 white;
+         ;
+      }
+   </style>
+   <link rel="stylesheet" href="../../../resources/css/official/component.css">
+   <link rel="stylesheet" href="../../../resources/css/official/upload.css">
+   <link rel="stylesheet" href="../../../resources/css/official/upload_form.css">
+   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+
+</head>
+
+<body>
+   <div class="head-holder">
+      <div class="logo-holder">
+         <span class="logo">GFBeam</span>
+      </div>
+   </div>
+   <div class="upload-holder">
+      <div id="title">标题</div>
+      <div class="cell">
+         点击下方区域选择项目（图片或声音）。
+      </div>
+      <div id="preview-holder">
+         <div id="colorful-boxes">
+            <div class="cbox-outer">
+               <div class="cbox-inner box-color1">项目选择</div>
+            </div>
+            <div class="cbox-outer">
+               <div class="cbox-inner box-color2">项目选择</div>
+            </div>
+            <div class="cbox-outer">
+               <div class="cbox-inner box-color3">项目选择</div>
+            </div>
+            <div class="cbox-outer">
+               <div class="cbox-inner box-color4">项目选择</div>
+            </div>
+            <div class="cbox-outer">
+               <div class="cbox-inner box-color5">项目选择</div>
+            </div>
+         </div>
+         <span class="btn-remove"></span>
+         <input type="file" accept="image/*, audio/*" id="file">
+      </div>
+      <div class="cell">公布位置信息，为探索留下踪迹，开启<strong>光阴</strong>，参与进来的成员将共同构建这条能够“时间旅行”的条目。<span class="note-trigger"></span><span class="note">记录成功后，所有用户可以看见位置，“有宝藏！”按钮消失；关于生态生命的条目不适合公布位置信息。</span></div>
+      <div class="project-geo">
+         <span class="map" id="map"></span>
+         <span class="geoform-panel">
+            <input id="longitude" type="text" placeholder="Longitude" title="经度">
+            <input id="latitude" type="text" placeholder="Latitude" title="纬度">
+            <button id="control" class="button developing">测试定位</button>
+         </span>
+         <div id="ignore-ceiling"></div>
+      </div>
+      <div class="cell">正文。</div>
+      <span class="project-letter">
+         <textarea id="letter" title="留言输入框" name=""></textarea>
+      </span>
+      <div class="cell">记一记现在的天气、动作、心情。</div>
+      <span class="project-state">
+         <span class="red">
+            <li class="state-item" data-i="1">A</li>
+            <li class="state-item" data-i="2">B</li>
+            <li class="state-item current-state" data-i="3">C</li>
+            <li class="state-item" data-i="4">D</li>
+            <li class="state-item" data-i="5">E</li>
+         </span>
+         <span class="green">
+            <li class="state-item" data-i="1">A</li>
+            <li class="state-item" data-i="2">B</li>
+            <li class="state-item current-state" data-i="3">C</li>
+            <li class="state-item" data-i="4">D</li>
+            <li class="state-item" data-i="5">E</li>
+         </span>
+         <span class="blue">
+            <li class="state-item" data-i="1">A</li>
+            <li class="state-item" data-i="2">B</li>
+            <li class="state-item current-state" data-i="3">C</li>
+            <li class="state-item" data-i="4">D</li>
+            <li class="state-item" data-i="5">E</li>
+         </span>
+      </span>
+      <span class="project-action">
+         <li class="button button-upload" id="publish">记录</li>
+         <li class="button button-preview">预览</li>
+      </span>
+      <div id="upform-ceiling" class="hidden"><span>正在上传中，请等待 ；）</span></div>
+   </div>
+
+</body>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js' async="true"></script>
+<script src="/resources/js/official/util.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/upyun/dist/upyun.js"></script>
+<script src="/resources/js/official/browser-md5-file.js"></script>
+<script src="/resources/js/official/xss.min.js"></script>
+<script>
+   (function () {
+      var fileInput = document.getElementById('file'),
+         previewHolder = document.getElementById('preview-holder'),
+
+         stateItems = document.getElementsByClassName('project-state')[0],
+         redItems = [].slice.call(document.querySelectorAll('.red .state-item')),
+         greenItems = [].slice.call(document.querySelectorAll('.green .state-item')),
+         blueItems = [].slice.call(document.querySelectorAll('.blue .state-item')),
+         pr = 3,
+         pg = 3,
+         pb = 3, // 状态的初始值
+         offsetPixel = [-144, -108, -72, -36, 0, 36, 72, 108, 144], // 预存储移动至 5 个位置需要多少像素
+
+         btnPublish = document.getElementById('publish'),
+         title = document.getElementById('title'),
+         previewModel,
+
+         radioPanels = document.getElementsByClassName('radio-panel'),
+         radios = document.getElementsByClassName('radio'),
+         inputStation = document.getElementById('station-input'),
+         colorfulBoxes = document.getElementsByClassName('cbox-inner'),
+         formLongitude = document.getElementById('longitude'),
+         formLatitude = document.getElementById('latitude'),
+         controlEle = document.getElementById('control'),
+         formLetter = document.getElementById('letter'),
+         map,
+         cache = createCache()
+         bucket = new upyun.Bucket('morpho'),
+         client = new upyun.Client(bucket, () => {})
+      ;
+
+      client.setBodySignCallback((bucket, serve) => {
+         var method = 'POST';
+         var params = 'bucket=' + bucket.bucketName + '&method=' + method + '&file=' + serve['filename'] + '&md5=' + serve['md5']
+         return fetch('/proxy/project/getformapi?' + params + '&type=TME')
+            .then(function (response) {
+               if (response.status !== 200) {
+                  console.error('gen header sign faild!')
+                  return;
+               }
+               return response.json()
+            })
+            .then(function(data) {
+               return Promise.resolve(data);
+            })
+      })
+
+      var functiongrapes = {
+         serverCallback: {
+            promise: {
+               afterUploadingUpyun: function(data) {
+                  return new Promise((resolve, reject) => {
+                     util.restserve('post', '/proxy/time/publish0fVerdict', functiongrapes.serverCallback.postPublish0f.bind(this, resolve, reject), data);
+                  })
+               },
+            },
+            postPublish0f: function(resolve, reject, res, context) {
+               res = JSON.parse(res);
+               if (res.success) { resolve(res) }
+               else { reject() }
+            }
+         },
+         eventCallback: {
+            locationClickHandler: function() {
+               // lon = formLongitude.value, lat = formLatitude.value;
+               map.flyTo({ center: [formLongitude.value, formLatitude.value], zoom: 13, pitch: 0 });
+            },
+            publishClickHandler: function () {
+               var lon = '', lat = '', data, file;
+               if (!(fileInput.value)) {
+                  alert('There\'s nothing in box.')
+                  return;
+               }
+               lon = formLongitude.value, lat = formLatitude.value;
+               if (! util.coordckr(lon, lat)) { alert('位置信息填写有误，请检查；）'); return ; }
+               data = new FormData(), file = fileInput.files[0];
+
+               browserMD5File(file, function (err, md5) {
+                  client.formPutFile('/TIME', file, {filename: file.name, md5: md5.toUpperCase()})
+                  .then(res =>
+                  {
+                     if (res.code === 200)
+                     {
+                        console.log('======= UPYUNTIME =======');
+                        console.timeEnd('upload');
+                        multiAppend(data, {
+                           f: res.url.slice(res.url.lastIndexOf('/') + 1),
+                           j: lon,
+                           w: lat,
+                           i: decodeURIComponent(pathname.slice(pathname.lastIndexOf('/') + 1)),
+                           l: filterXSS(formLetter.value),
+                           r: pr,
+                           g: pg,
+                           b: pb,
+                        });
+                        return functiongrapes.serverCallback.promise.afterUploadingUpyun(data)
+                     }
+                     else { alert('文件上传失败，传输服务器错误:('); throw new Error('morpho ERROR'); }
+                  })
+                  .then(res => {
+                     if (res.success) { alert('已记录:)'); location.href = localStorage.getItem('PREV_LOCATION'); }
+                     else { alert('记录过程发生错误:(') }
+                  })
+                  .catch(err => {
+                     console.log('条目记录失败，数据服务器错误:(')
+                  });
+               });
+            }
+         }
+      }
+      init();
+
+      function initEvents() {
+         btnPublish.addEventListener('click', functiongrapes.eventCallback.publishClickHandler);
+         controlEle.addEventListener('click', functiongrapes.eventCallback.locationClickHandler);
+      }
+      function initData() {
+         window.addEventListener('load', function(e) {
+            mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbmppYXpoaSIsImEiOiJjazE3b3BpNG0wODNkM3BydmJjaWx2bnNmIn0.wEwIwIpfIldJ055ZQvl4RQ';
+               map = new mapboxgl.Map({
+               container: 'map',
+               style: 'mapbox://styles/mapbox/streets-v9'
+            });
+         })
+      }
+      function init() {
+         initData();
+         initEvents();
+      }
+
+
+      function multiAppend(data, obj) {
+         var key;
+         for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+               data.append(key, obj[key]);
+            }
+         }
+      }
+
+      function createCache() {
+         var data = {};
+         data.prevType = 0;
+         return {
+            prevType: function () {
+               return data.prevType;
+            },
+            setPrevType: function (v) {
+               data.prevType = v;
+            }
+         }
+      }
+
+      // util.tc(loadingLayer, 'loading');
+      fileInput.addEventListener('change', function () {
+         var file;
+         if (previewModel != null) {
+            previewModel = document.getElementsByClassName('preview-model')[0];
+            console.log(previewModel)
+         }
+         open = 0;
+         if (!fileInput.value) {
+            return;
+         }
+         file = fileInput.files[0];
+
+         if (file.type !== 'image/jpeg' && file.type !== 'image/png' &&
+            file.type !== 'audio/wav' && file.type !== 'audio/x-m4a') {
+            alert('Please check the type of file.');
+            return;
+         }
+         previewHolder.style.height = 'auto';
+         util.ac(previewHolder, 'open');
+         var reader = new FileReader(),
+            data;
+         reader.type = file.type;
+         reader.onload = function (e) {
+            data = e.target.result;
+            if (previewModel !== undefined) {
+               previewModel.style.display = 'block';
+               previewModel.src = data;
+               // var c = window.setInterval(function(){
+               //    if (previewModel.complete)
+               //    {
+               //       clearInterval(c);
+               //    }
+               // }, 16);
+            } else {
+
+               if (this.type === 'audio/wav' || this.type === 'audio/x-m4a') {
+                  var audio = document.createElement('audio');
+                  audio.controls = true;
+                  audio.src = data;
+                  previewHolder.append(audio);
+                  previewModel = audio;
+                  return;
+               }
+
+               var image = document.createElement('img');
+               image.className = 'preview-model';
+               image.src = data;
+               previewHolder.append(image);
+               previewModel = image;
+               // var c = window.setInterval(function(){
+               //    if (image.complete)
+               //    {
+               //       clearInterval(c);
+               //    }
+               // }, 16);
+            }
+         };
+         reader.readAsDataURL(file);
+      })
+
+      previewHolder.addEventListener('click', function (e) {
+         if (util.hc(e.target, 'btn-remove')) {
+            // util.ac(infoHolder, 'hidden');
+            fileInput.value = '';
+            util.rc(previewHolder, 'open');
+            previewModel.style.display = 'none';
+            // previewHolder.style.height = '163px';
+            open = 1;
+
+            return;
+         }
+         fileInput.click();
+      })
+
+      stateItems.addEventListener('click', function (e) {
+         var target = e.target,
+            parent = target.parentNode,
+            dataI, length, i, offset;
+         dataI = target.dataset['i'];
+         if (util.hc(parent, 'red')) {
+            pr = selectState(target, parent, redItems, pr);
+         } else if (util.hc(parent, 'green')) {
+            pg = selectState(target, parent, greenItems, pg);
+         } else if (util.hc(parent, 'blue')) {
+            pb = selectState(target, parent, blueItems, pb);
+         }
+      })
+
+      function generateColorfulBoxes() {
+         var myProper = ['width', 'height'],
+            random1, random2, i, l = colorfulBoxes.length;
+         for (i = 0; i < l; ++i) {
+            random1 = Math.floor(Math.random() * 2);
+            random2 = Math.floor(Math.random() * 150);
+            colorfulBoxes[i].style[myProper[random1]] = random2 + 'px';
+         }
+      }
+      generateColorfulBoxes();
+
+      function selectState(target, parent, items, pI) {
+         // console.log(pI);
+         var length, i, offset;
+         if (util.hc(target, 'current-state')) {
+            // console.log(pI);
+            if (util.hc(parent, 'selected')) {
+               util.tc(parent, 'selected');
+               return pI;
+            }
+            length = items.length;
+            for (i = 0; i < length; ++i) {
+               offset = offsetPixel[(i - pI + 5)];
+               items[i].style.left = offset + 'px';
+            }
+            util.ac(parent, 'selected');
+         } else {
+            util.rc(items[pI - 1], 'current-state');
+            util.ac(target, 'current-state');
+            pI = parseInt(target.dataset['i']);
+            util.tc(parent, 'selected');
+            target.style.left = '0px';
+         }
+         return pI;
+      }
+      pathname = window.location.pathname;
+      title.innerHTML = '🌠 本条光阴记录在编号为“' + decodeURI(pathname.slice(pathname.lastIndexOf('/') + 1) + '“的核心条目中');
+   })();
+</script>
+
+</html>

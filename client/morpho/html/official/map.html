@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="white">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+   <title>位置信息</title>
+   <link rel="stylesheet" href="/resources/css/official/reset.css">
+   <link rel="stylesheet" href="/resources/css/official/component.css">
+   <link rel="stylesheet" href="/resources/css/official/header.css">
+   <link rel="stylesheet" href="/resources/css/official/new_header.css">
+   <link rel="stylesheet" href="/resources/css/official/index.css">
+   <link rel="stylesheet" href="/resources/css/official/content.css">
+   <link rel="stylesheet" href="/resources/css/official/developing.css">
+   
+   <style>
+
+   </style>
+</head>
+
+<body>
+   <div class="flex-holder">
+      <div class="head-holder" id="expander">
+         <div class="logo-holder">
+            <span class="logo">柳格</span>
+         </div>
+         <nav id="explore-wrapper" class="expander_wrapper">
+            <div id="explore-trigger" class="exp_trigger">
+               <span id="logo-explore"></span>
+               <button id="explore" data-switch="close" class="reset expbtn_trigger" style="margin-left: 3px">explore</button>
+            </div>
+            <ul id="explore-list" class="exp_panel">
+               <li>
+                  <div id="nsearch-wrapper">
+                     <label for="keynode"><span id="logo-nsearch"></span></label>
+                     <input id="keynode" type="text" class="reset" placeholder="搜索标签" />
+                     <button class="reset" id="nsearch">search</button>
+                  </div>
+               </li>
+               <li>
+                  <div id="lsearch-wrapper">
+                     <label for="keylocation"><span id="logo-lsearch"></span></label>
+                     <input id="keylocation" type="text" class="reset" placeholder="搜索位置（经纬度）" />
+                     <button class="reset" id="lsearch">search</button>
+                  </div>
+               </li>
+               <li id="stewli"><a href="/" id="stew">条目集</a></li>
+               <li id="coreli"><a href="/core" id="core">核心条目</a></li>
+               <li id="storyli"><a href="/story" id="story">故事</a></li>
+               <li id="timeli"><a href="/time" id="time">光阴</a></li>
+               <li id="sweetfruxli" class="purelinkli border-bottom"><a href="/sweetfrux" id="sweetfruxLink" class="purelink">关注的结点</a></li>
+               <li id="sweetcoreli" class="purelinkli"><a href="/sweetcore" id="sweetcoreLink" class="purelink">关注的核心</a></li>
+            </ul>
+         </nav>
+         <div id="action-wrapper" class="expander_wrapper">
+            <div id="action-trigger" class="exp_trigger">
+               <span id="logo-action"></span>
+               <button id="action" data-switch="close" class="reset expbtn_trigger" style="margin-left: 3px;">menu</button>
+            </div>
+            <ul id="action-list" class="exp_panel">
+               <li class="expander-pbottom">
+                  <div id="bnnsubmit-wrapper">
+                     <label for="bulbnodename"><span id="logo-bnnsubmit"></span></label>
+                     <input id="bulbnodename" type="text" class="reset" placeholder="创建结点" />
+                     <button class="reset" id="bnnsubmit">记录仓库故事</button>
+                  </div>
+               </li>
+               <li id="accountli">
+                  <div id="account-wrapper">
+                     <div id="login-wrapper"><span id="login_tip">使用已有账户</span><span id="ltip_helper"></span><a href="/login" id="login_anchor"><span id="login-icon"></span>登录</a></div>
+                     <div id="sigup-wrapper"><span id="sigup_tip">创建一个账户</span><span id="stip_helper"></span><a href="/login" id="sigup_anchor"><span id="sigup-icon"></span>注册</a></div>
+                  </div>
+                  <div id="account-wrapper2">
+                     <a href="/member/" id="personalinfo" class="load-self">个人中心</a>
+                     <button id="logout" class="reset">关闭登录</button>
+                  </div>
+               </li>
+            </ul>
+         </div>
+         <div id="more-wrapper">
+            <span id="logo-more"></span>
+            <button id="more2" class="reset" style="margin-left: 3px;">more</button>
+         </div>
+      </div>
+      <div class="content-holder" id="project-list"></div>
+   </div>
+</body>
+<script src="/resources/js/class.js"></script>
+<script src="/resources/js/official/util.js"></script>
+<script src="/resources/js/official/map.js"></script>
+<script src="/resources/js/official/scrollX.js"></script>
+<script src="/resources/js/official/component/Expander2.js"></script>
+<script>
+   if (window.innerWidth > 1024){
+      var scrollX = new scrollX({
+            xElem: document.getElementById('project-list'),
+         }
+      );
+   }
+</script>
+</html>

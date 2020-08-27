@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+   <title>柳格账户</title>
+   <link rel="stylesheet" href="/resources/css/official/login.css">
+</head>
+
+<body class="overallclassicblack">
+   <div class="tonguewrapper">
+      <ul>
+         <li class="tongue origin"></li>
+         <li class="tongue white">
+         <li class="tongue bamboo"></li>
+         <li class="tongue black stuck"></li>
+         <li class="tongue she"></li>
+      </ul>
+   </div>
+   <div class="cerebrum">
+
+      <section id="dypanel">
+         <section class="soulwrapper">
+            <div class="soul">
+               <div class="classicwhite"></div>
+               <div class="classicblack"></div>
+            </div>
+         </section>
+         <div class="partinner">
+            <form class="form" method="post" name="form">
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="siName" type="text" placeholder="Email"
+                     name="siName">
+               </p>
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="siPwd" type="password"
+                     placeholder="Password" name="siPwd">
+               </p>
+               <p class="frameset">
+                  <input id="sisubmit" class="fullwidth" type="submit" value="Sign In" />
+               </p>
+               <p class="formbuttommessage"><a href="#0" class="signinoption" data-jumptarget="1">忘记密码？</a></p>
+               <p class="formbuttommessage"><a href="#0" class="signinoption" data-jumptarget="2">没有账号？现在注册</a>
+               </p>
+            </form>
+         </div>
+         <div class="partinner">
+            <p class="formmessage">输入的你的名称并设置新密码，我们将重置你的账户密码。</p>
+            <form class="form" method="post" name="form2">
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="reName" type="text" placeholder="Email"
+                     name="reName">
+               </p>
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="reCode" type="text" placeholder="Code"
+                     name="reCode">
+               </p>
+               <p class="frameset">
+                  <input id="reCodeSubmit" class="fullwidth haspadding" type="submit"
+                     value="Send Email Code" />
+               </p>
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="rePwd" type="password"
+                     placeholder="Password" name="rePwd">
+               </p>
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="rePwd2" type="password"
+                     placeholder="Retype Password" name="rePwd2">
+               </p>
+               <p class="frameset">
+                  <input id="resubmit" class="fullwidth haspadding" type="submit"
+                     value="Execute Reset Instructions" />
+               </p>
+               <p class="formbuttommessage"><a href="#0" class="signinoption" data-jumptarget="0">已重置，现在登录</a>
+               </p>
+               <p class="formbuttommessage"><a href="#0" class="signinoption" data-jumptarget="2">没有账号？现在注册</a>
+               </p>
+            </form>
+         </div>
+         <div class="partinner">
+            <form class="form" method="post" name="form3">
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="suName" type="text" placeholder="Email"
+                     name="suName">
+                  <div class="existtips ishidden">
+                     <ul>
+                        <li>You cannot sign up with an existing account.</li>
+                        <li>If you want to reset your password,find the 'Forgot?' in page and click.</li>
+                     </ul>
+                  </div>
+               </p>
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="suCode" type="text" placeholder="Code"
+                     name="suCode">
+               </p>
+               <p class="frameset">
+                  <input id="suCodeSubmit" class="fullwidth haspadding" type="submit"
+                     value="Send Email Code" />
+               </p>
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="suNick" type="text"
+                     placeholder="Display Name" name="suNick">
+               </p>
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="suPwd" type="password"
+                     placeholder="Password" name="suPwd">
+               </p>
+               <p class="frameset">
+                  <input class="fullwidth haspadding hasborder" id="suPwd2" type="password"
+                     placeholder="Retype Password" name="suPwd2">
+               </p>
+               <p class="frameset">
+                  <input type="checkbox" id="agreeterms" name="suTerm">
+                  <label for="agreeterms">创建账户代表我同意《柳格协议》。</label>
+               </p>
+               <p class="frameset">
+                  <input id="susubmit" class="fullwidth" type="submit" value="Create Account" />
+               </p>
+               <p class="formbuttommessage"><a href="#0" class="signinoption" data-jumptarget="0">已注册，现在登录</a>
+               </p>
+            </form>
+         </div>
+      </section>
+      <div class="heightbox"></div>
+   </div>
+</body>
+<script src="/resources/js/official/util.js"></script>
+<script>
+   (function (window) {
+
+      var functionGrapes = {
+         eventHandler: {
+            // 提交按钮的事件
+            submitBtnEl: {
+               clickSi: function(e) { // 登录
+                  var data = new FormData(), warnText = '';
+                  e.preventDefault();
+
+                  // 判断：填写信息是否存在空值；邮箱格式的合法性
+                  if (form.siName.value.trim() === '' || form.siPwd.value.trim() === '')
+                  { warnText += variableCherries.copy.event.submitBtnEl.verify.nullvalue }
+                  if (! variableCherries.regPattern.email.test(form.siName.value)) { warnText += variableCherries.copy.event.submitBtnEl.verify.email }
+                  if (! (warnText === '')) { alert(warnText); return ; }
+
+                  data.append('m', form.siName.value);
+                  data.append('p', form.siPwd.value);
+                  
+                  util.restserve('post', '/proxy/hulaa/login', functionGrapes.serverCallback.submitBtnEl.postSi, data);
+               },
+               clickRe: function(e) { // 重置
+                  e.preventDefault();
+                  alert("重置密码")
+                  
+               },
+               clickSu: function(e) { // 注册
+                  var data = new FormData(), warnText = '';
+                  e.preventDefault();
+
+                  // 判断：填写信息是否存在空值；邮箱格式的合法性；密码和验证密码的一致性；协议的勾选
+                  if (  form3.suName.value.trim() === ''
+                     || form3.suNick.value.trim() === ''
+                     || form3.suCode.value.trim() === ''
+                     || form3. suPwd.value.trim() === '')
+                  { warnText += variableCherries.copy.event.submitBtnEl.verify.nullvalue }
+                  if (! variableCherries.regPattern.email.test(form3.suName.value)) { warnText += variableCherries.copy.event.submitBtnEl.verify.email }
+                  if (! (form3.suPwd2.value === form3.suPwd.value)) { warnText += variableCherries.copy.event.submitBtnEl.verify.repwd }
+                  if (form3.suTerm.checked === false) { warnText += variableCherries.copy.event.submitBtnEl.verify.term }
+                  if (! (warnText === '')) { alert(warnText); return ; }
+
+                  data.append('m', form3.suName.value);
+                  data.append('n', form3.suNick.value);
+                  data.append('p', form3.suPwd.value);
+                  data.append('c', form3.suCode.value);
+
+                  util.restserve('post', '/proxy/hulaa/signup', functionGrapes.serverCallback.submitBtnEl.postSu, data);
+               },
+            },
+            // 验证按钮的事件
+            verifyBtnEl: {
+               clickRe: function(e) { // 用于重置的邮箱代码
+                  alert("验证重置")
+                  e.preventDefault();
+               },
+               clickSu: function(e) { // 用于注册的邮箱代码
+                  var data = new FormData(), warnText = '';
+                  e.preventDefault();
+
+                  // 判断：邮箱格式的合法性
+                  if (! variableCherries.regPattern.email.test(form3.suName.value)) { warnText += variableCherries.copy.event.submitBtnEl.verify.email }
+                  console.log(! (warnText === ''))
+                  if (! (warnText === '')) { alert(warnText); return ; }
+
+                  data.append('m', form3.suName.value);
+
+                  util.restserve('post', '/proxy/hulaa/code', functionGrapes.serverCallback.verifyBtnEl.postSu, data);
+               },
+            }
+            
+         },
+         serverCallback: {
+            submitBtnEl: {
+               postSi: function(res) {
+                  res = JSON.parse(res);
+                  // 跳转回至上一页
+                  // 若 sessionStorage 中无记录，则跳转至首页
+                  // 临时方案：跳转至首页
+                  if (res.success)
+                  {
+                     alert(variableCherries.copy.server.submitBtnEl.si.success);
+                     if (localStorage.getItem('PREV_LOCATION') == null) { location.href = "/" }
+                     else { location.href = localStorage.getItem('PREV_LOCATION') }
+                  }
+                  else
+                  { alert(variableCherries.copy.server.submitBtnEl.si.failure) }
+               },
+               postSu: function(res) {
+                  res = JSON.parse(res);
+                  if (res.success) {
+                     // 跳转回至上一页
+                     // 若 sessionStorage 中无记录，则跳转至首页
+                     // 临时方案：跳转至首页
+                     localStorage.setItem('mname', res.name);
+                     alert(variableCherries.copy.server.submitBtnEl.su.success);
+                     location.href = "/";
+                  } else {
+                     alert(variableCherries.copy.server.submitBtnEl.su.failure);
+                  }
+               }
+            },
+            verifyBtnEl: {
+               postSu: function(res) {
+                  res = JSON.parse(res);
+                  if (res.success) { alert(variableCherries.copy.server.verifyBtnEl.su.success) }
+                  else { alert(variableCherries.copy.server.verifyBtnEl.su.failure) }
+               }
+            },
+         }
+      },
+      variableCherries = {
+         submitBtnEl: {
+            si: document.getElementById('sisubmit'),
+            re: document.getElementById('resubmit'),
+            su: document.getElementById('susubmit'),
+         },
+         verifyBtnEl: {
+            re: document.getElementById('reCodeSubmit'),
+            su: document.getElementById('suCodeSubmit'),
+         },
+         copy: {
+            server: {
+               submitBtnEl: {
+                  si: {
+                     success: '登录成功:)',
+                     failure: '登录失败:(',
+                  },
+                  su: {
+                     success: '注册成功:)',
+                     failure: '注册失败:(',
+                  }
+               },
+               verifyBtnEl: {
+                  su: {
+                     success: '发送成功，注意查看电子邮箱，验证码有 7 分钟的有效期:)',
+                     failure: '发送失败:(',
+                  }
+               }
+            },
+            event: {
+               submitBtnEl: {
+                  verify: {
+                     nullvalue: '信息填写有缺略:(',
+                     email: '邮箱格式有误:(',
+                     repwd: '两次密码不等:(',
+                     term: '未勾选《柳格协议》:(',
+                  },
+                  
+               },
+               verifyBtnEl: {
+
+               },
+            },
+            
+         },
+         regPattern: {
+            email: /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/,
+
+         }
+      };
+
+      init();
+
+      function init() {
+         initEvents();
+      }
+
+      function initEvents() {
+
+         variableCherries.submitBtnEl.si.addEventListener('click', functionGrapes.eventHandler.submitBtnEl.clickSi);
+         variableCherries.submitBtnEl.re.addEventListener('click', functionGrapes.eventHandler.submitBtnEl.clickRe);
+         variableCherries.submitBtnEl.su.addEventListener('click', functionGrapes.eventHandler.submitBtnEl.clickSu);
+
+         variableCherries.verifyBtnEl.re.addEventListener('click', functionGrapes.eventHandler.verifyBtnEl.clickRe);
+         variableCherries.verifyBtnEl.su.addEventListener('click', functionGrapes.eventHandler.verifyBtnEl.clickSu);
+
+      }
+
+
+      function extend(x, y) {
+         for (var key in y) {
+            if (y.hasOwnProperty(key)) {
+               x[key] = y[key];
+            }
+         }
+         return x;
+      }
+
+      function dynamicoptions(el, options) {
+         this.el = el;
+         this.options = extend({}, this.options);
+         extend(this.options, options);
+         this.init();
+      }
+      dynamicoptions.prototype.options = {
+            tab: '',
+            item: '',
+            autoHSpeed: 368,
+         },
+         dynamicoptions.prototype.init = function () {
+            this.tabs = [].slice.call(this.el.querySelectorAll(this.options.tab));
+            this.items = [].slice.call(this.el.querySelectorAll(this.options.item));
+            this.autoheightPanel = [].slice.call(this.el.querySelectorAll(this.options.autoheight));
+            this.current = -1;
+            this.show();
+            this.initevents();
+         },
+         dynamicoptions.prototype.show = function (index) {
+            if (this.current >= 0) {
+               util.rc(this.tabs[this.current], 'isselected');
+               util.rc(this.items[this.current], 'isselected');
+            }
+            this.current = index != undefined ? index : 0;
+            util.ac(this.tabs[this.current], 'isselected');
+            util.ac(this.items[this.current], 'isselected');
+            this.funTransitionHeight(this.options.autoHSpeed);
+
+         },
+         dynamicoptions.prototype.initevents = function () {
+            var me = this;
+            this.tabs.forEach(function (tab, index) {
+               tab.addEventListener('click', function (e) {
+                  var next = index;
+                  e.preventDefault();
+                  next = tab.dataset['jumptarget']
+                  me.show(next);
+               })
+            })
+         },
+         dynamicoptions.prototype.funTransitionHeight = function () {
+            var height, targetHeight, time = this.options.autoHSpeed;
+            if (typeof window.getComputedStyle === "undefined") {
+               return
+            }
+            height = window.getComputedStyle(this.el).height;
+            this.el.style.transition = "none";
+            this.el.style.height = "auto";
+            targetHeight = window.getComputedStyle(this.el).height;
+
+            this.el.style.height = height;
+            this.el.offsetWidth; // rerander
+
+            if (time) {
+               this.el.style.transition = "height " + time + "ms"
+            }
+
+            this.el.style.height = targetHeight;
+         };
+      window.dynamicoptions = dynamicoptions;
+
+      // emotion themes
+      var sticker = [].slice.call(document.getElementsByClassName("tonguewrapper")[0].querySelectorAll("li.tongue"));
+      sticker.forEach(function (target, index) {
+         target.addEventListener('click', function () {
+            sticker.forEach(function (target2, index2) {
+               util.rc(target2, "stuckclick");
+            })
+            setTimeout(function () {
+               if (util.hc(target, "stuck"))
+                  util.ac(target, "stuckclick");
+               sticker.forEach(function (target2, index2) {
+                  util.rc(target2, "stuck");
+                  util.rc(document.getElementsByTagName("body")[0],
+                     "overallclassicwhite");
+                  util.rc(document.getElementsByTagName("body")[0],
+                     "overallclassicbamboo");
+                  util.rc(document.getElementsByTagName("body")[0],
+                     "overallclassicblack");
+               })
+               util.ac(target, "stuck");
+               if (index == 0) {
+
+               }
+               if (index == 1) {
+                  util.ac(document.getElementsByTagName("body")[0], "overallclassicwhite");
+               }
+               if (index == 2) {
+                  util.ac(document.getElementsByTagName("body")[0], "overallclassicbamboo");
+               }
+               if (index == 3) {
+                  util.ac(document.getElementsByTagName("body")[0], "overallclassicblack");
+               }
+            }, 0);
+         })
+      })
+
+   })(window);
+</script>
+<script>
+   (function () {
+      var g = new dynamicoptions(document.getElementById('dypanel'), {
+         tab: '.signinoption',
+         item: '.partinner',
+      });
+   })();
+</script>
+
+</html>

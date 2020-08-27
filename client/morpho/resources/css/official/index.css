@@ -1,0 +1,196 @@
+.flex-holder {
+   display: flex;
+   flex-direction: column;
+   height: 100vh;
+}
+.head-holder {
+   flex-shrink: 0;
+}
+img {
+   /* width: 100%;
+   height: 150px; */
+   /* border: 1px solid rgb(234, 237, 238); */
+   /* padding: 3px; */
+   position: relative;
+   /* background: rgb(249, 250, 250); */
+   /* box-shadow: 0 0 1px rgb(160, 211, 167); */
+   /* box-shadow: 0 16px 28px -9px rgba(0, 0, 0, 0.56), 0 4px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 6px -3px rgba(0, 0, 0, 0.2); */
+   transition: transform 0.1s;
+}
+html {
+   /* height: 100%; */
+}
+body {
+   /* background-color: #e5e4cc; */
+   /* background-color: rgb(253, 253, 253); */
+   /* height: 100%; */
+   /* height: 100vh; */
+   /* overflow: hidden; */
+}
+/* ========================侧边烂：待废弃=========================== */
+.nav-switch-side {
+   margin-left: 8px;
+}
+.switch-side{
+   position: absolute;
+   height: 100%;
+   width: 20px;
+   /* border: 1px solid salmon; */
+   display: flex;
+   align-items: center;
+   top:0;
+   right: 0;
+   bottom: 0;
+   transform: translateX(20px);
+   cursor: pointer;
+   opacity: 0;
+   transition: transform ease 0.5s, opacity ease 0.5s;
+}
+.switch-side.show{
+   transform: translateX(4px);
+   opacity: 1;
+}
+.switch-side.show:hover{
+   transform: translateX(0px);
+   transition: transform ease 0.2s;
+}
+.switch-side-assist{
+   position: relative;
+   height: 2px;
+   width: 100%;
+   display: block;
+   background-color: rgb(12, 182, 60);
+}
+.switch-side-assist::after, .switch-side-assist::before{
+   content: '';
+   position: absolute;
+   height: 2px;
+   width: 100%;
+   bottom: 6px;
+   display: inline-block;
+   background-color:rgb(12, 182, 60);
+}
+.switch-side-assist::before{
+   top: 6px;
+}
+/* ========================画廊=========================== */
+
+@keyframes wait-detail{
+	from{
+      background-color: transparent;
+   }50%{
+      /* background-color: rgb(255, 255, 255); */
+      /* backdrop-filter: saturate(180%) blur(1px); */
+      background-color: rgba(255, 255, 255, 0.527)
+   }
+   to{
+      background-color: transparent;
+	}
+}
+/* ========================侧栏=========================== */
+.side-holder {
+   width: 400px;
+   height: calc(100% - 36px);
+   position: absolute;
+   /* display: flex; */
+   top: 36px;
+   right: -400px;
+   /* right: 0; */
+   /* background-color: rgba(255, 255, 255, 0.964); */
+   background-color: rgba(251, 251, 251, 0.938);
+   -webkit-backdrop-filter: saturate(180%) blur(18px);
+   backdrop-filter: saturate(360%) blur(18px);
+   border-left: 1px solid rgb(204, 211, 204);
+   transition: transform 0.6s cubic-bezier(.49,-0.01,.23,1.04);
+   overflow: auto;
+   z-index: 2;
+}
+.side-holder.slide-in {
+   transform: translateX(-400px);
+}
+.node-list {
+   display: inline-flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   padding: 12px 8px;
+   /* text-align: center; */
+}
+.node-list a {
+   color: rgb(27, 27, 27);
+   transition: background-color 0.4s ease, color 0.4s ease;
+   padding: 0 3px;
+}
+.node-list a:hover {
+   background-color: rgba(0, 230, 65, 0.233);
+   border-radius: 3px;
+   color: rgb(3, 90, 28);
+   transition: background-color 0s ease, color 0s ease;
+}
+.node-holder {
+   display: inline-block;
+   flex-shrink: 0;
+   height: 30px;
+}
+.node {
+   line-height: 30px;
+   display: inline-block;
+   font-size: 16px;
+}
+.node-holder::after {
+   content: '·';
+   font-size: 26px;
+   padding: 0 3px;
+   vertical-align: middle;
+   color: rgba(0,0,0,.2);
+}
+.node-holder:last-child::after {
+   content: '';
+}
+.side-project-holder {
+   margin: 12px 16px;
+   /* background-color: white; */
+   border :1px solid rgb(234, 237, 238);
+   border-radius: 6px;
+   font-size: 0;
+}
+.side-project-holder img{
+   border: 0;
+   padding: 9px;
+   border-radius: 6px;
+   width: 100%;
+   background-color: white;
+}
+.info-holder {
+   margin: 12px 16px;
+   background-color: white;
+   border :1px solid rgb(234, 237, 238);
+   border-radius: 6px;
+}
+.letter-holder {
+   padding: 9px;
+}
+.exif-holder {
+   margin: 12px 16px;
+   background-color: white;
+   border :1px solid rgb(234, 237, 238);
+   border-radius: 6px;
+}
+.exif-items {
+   padding: 9px;
+}
+
+
+.head-holder {
+   /* background-color: rgb(0, 230, 64); */
+   /* border-bottom: 3px solid rgb(204, 243, 214); */
+   border-bottom: none;
+}
+
+.logo-holder {
+   width: auto;
+   font-size: 20px;
+   background-color: rgb(47, 47, 47);
+   color: rgb(0, 230, 64);
+   margin: 0;
+   /* padding: 0 28px; */
+}

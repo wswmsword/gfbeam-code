@@ -1,0 +1,147 @@
+.flex-holder {
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+}
+#write-holder {
+   width: 100%;
+   height: 100%;
+   position: absolute;
+   display: none;
+   top: 0;
+   left: 0;
+   z-index: 2;
+   background-color: rgba(255, 255, 255, 0.699);
+   overflow: scroll;
+}
+#write-holder.visible {
+   display: block;
+}
+
+#write-panel {
+   position: relative;
+   width: 100%;
+   max-width: 899px;
+   min-height: 200px;
+   background: white;
+   margin: 67px auto;
+   padding: 0 4px;
+   border-radius: 5px;
+   border: 1px solid rgb(23, 175, 36);
+   box-shadow: inset 0 0 0 4px rgb(201, 240, 175);
+}
+
+#container {
+   flex-grow: 1;
+   display: flex;
+   min-height: 0;
+}
+#side-bar {
+   width: 160px;
+   /* height: 100vh; */
+   height: auto;
+   background: rgb(232, 234, 237);
+   position: relative;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+}
+#path-map {
+   color: white;
+   background-color: rgb(212, 216, 221);
+   height: 90px;
+   /* text-shadow: 0 1px 1px rgb(0, 230, 64); */
+}
+#path-content {
+   position: relative;
+   flex-grow: 1;
+}
+.path-item {
+   position: absolute;
+   width: 100%;
+   padding: 9px 12px;
+   top: 0;
+   font-size: 14px;
+   color: #8A9099;
+}
+.path-item.left-hidden {
+   animation: slide-left-out .6s ease forwards;
+}
+.path-item.left-visible {
+   animation: slide-left-in .6s ease forwards;
+}
+.path-item.right-hidden {
+   visibility: visible;
+   animation: slide-right-out .6s ease forwards;
+}
+.path-item.right-visible {
+   animation: slide-right-in .6s ease forwards;
+}
+@keyframes slide-left-out
+{
+	from {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+   } to {
+      transform: translateX(-18%);
+      opacity: 0;
+      visibility: hidden;
+   }
+}
+@keyframes slide-left-in
+{
+   from {
+      transform: translateX(18%);
+      opacity: 0;
+      visibility: hidden;
+   } to {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+   }
+}
+@keyframes slide-right-out
+{
+	from {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+   } to {
+      transform: translateX(18%);
+      opacity: 0;
+      visibility: hidden;
+   }
+}
+@keyframes slide-right-in
+{
+   from {
+      transform: translateX(-18%);
+      opacity: 0;
+      visibility: hidden;
+   } to {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+   }
+}
+#country, #province, #city, #area, #station {
+   left: 0;
+   visibility: hidden;
+   height: 100%;
+   overflow: scroll;
+}
+.country-item, .province-item, .city-item, .area-item, .station-item {
+   line-height: 17px;
+   padding: 13px 9px;
+   border-bottom: 1px solid #C4C7CC;
+   cursor: pointer;
+}
+.border-top {
+   border-top: 1px solid #C4C7CC;
+}
+
+#sweetfrux {
+   height: 27px;
+   padding: 0 9px;
+}

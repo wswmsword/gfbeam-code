@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html class="white">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+   <title>Insert title here</title>
+   <link rel="stylesheet" href="../../../resources/css/official/reset.css">
+   <link rel="stylesheet" href="../../../resources/css/official/component.css">
+   <link rel="stylesheet" href="../../../resources/css/official/header.css">
+   <link rel="stylesheet" href="../../../resources/css/official/comp_project.css">
+   <link rel="stylesheet" href="../../../resources/css/official/member.css">
+   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+   <title>个人信息</title>
+   <style>
+
+   </style>
+</head>
+
+<body>
+   <div class="flex-holder">
+      <div class="head-holder">
+         <div class="logo-holder">
+            <span class="logo">柳格</span>
+         </div>
+         <!-- <span class="switch-side"><span class="switch-side-assist"></span></span> -->
+      </div>
+      <div id="content-holder">
+         <div id="member-info">
+            <div id="memberi-left">
+               <div id="pic-wrapper"></div>
+            </div>
+            <div id="memberi-right">
+               <ul id="mitext-wrapper">
+                  <li id="n1">wsWmsw</li>
+                  <li id="n2">向你举起我珍藏的白旗</li>
+                  <li id="n3">2020 年 6 月 1 日加入</li>
+               </ul>
+               <ul id="flower-option">
+                  <li><button class="follow" id="follow">关注</button></li>
+               </ul>
+            </div>
+         </div>
+         <div id="tabs-attachment">
+            <nav id="menus">
+               <ul id="navtop-menu">
+                  <li class="mnav-item">核心条目</li>
+                  <li class="mnav-item">光阴</li>
+                  <li class="mnav-item">故事</li>
+               </ul>
+               <ul id="navbottom-menu">
+                  <li class="mnav-item">收藏的条目</li>
+                  <li class="mnav-item">关注的条目</li>
+                  <li class="mnav-item">关注的结点</li>
+                  <li class="mnav-item">地球足迹</li>
+               </ul>
+               <ul id="flower-menu">
+                  <li class="mnav-item">我关注</li>
+                  <li class="mnav-item">关注我</li>
+                  <li class="mtreeroot">
+                     <ul class="m-parent">
+                        <li class="mparent-key">其它</li>
+                     </ul>
+                     <ul class="m-child">
+                        <li class="mnav-item">最新回复</li>
+                     </ul>
+                  </li>
+               </ul>
+            </nav>
+            <!-- 核心条目 -->
+            <section class="tab-item" id="core-tab">
+               <div id="core-holder"></div>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+            <!-- 时光叶子 -->
+            <section class="tab-item" id="time-tab">
+               <ul id="time-holder"></ul>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+            <!-- 故事果子 -->
+            <section class="tab-item" id="story-tab">
+               <div id="story-holder"></div>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+            <!-- 收藏的条目 -->
+            <section class="tab-item" id="collection-tab">
+               <ul id="collection-holder"></ul>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+            <!-- 关注的条目 -->
+            <section class="tab-item" id="sweetcore-tab">
+               <ul id="sweetcore-holder"></ul>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+            <!-- 关注的结点 -->
+            <section class="tab-item" id="sweetfrux-tab">
+               <ul id="sweetfrux-holder"></ul>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+            <!-- 地球足迹 -->
+            <section class="tab-item" id="foot-tab">
+               <div id="foot-holder">
+                  <span id="map" style="width: 100%; height: 360px; display: block;"></span>
+               </div>
+               <!-- <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div> -->
+            </section>
+            <!-- 我关注 -->
+            <section class="tab-item" id="flower-tab">
+               <ul id="flower-holder"></ul>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+            <!-- 关注我 -->
+            <section class="tab-item" id="follower-tab">
+               <div id="follower-holder"></div>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+            <section class="tab-item" id="knock-tab">
+               <div id="tips-holder"></div>
+               <div class="mbtn-holder"><button class="btn-more more-button">查看更多</button></div>
+            </section>
+         </div>
+         <!-- <div id="main-panel">
+            <div id="project-holder"></div>
+         </div> -->
+      </div>
+   </div>
+</body>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js' async='true'></script>
+<script src="../../resources/js/class.js"></script>
+<script src="../../../resources/js/official/util.js"></script>
+<script src="../../../resources/js/official/member.js"></script>
+</html>

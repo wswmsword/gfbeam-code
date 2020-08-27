@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="white">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1">
+   <title>Insert title here</title>
+   <link rel="stylesheet" href="../../../resources/css/official/reset.css">
+   <link rel="stylesheet" href="../../../resources/css/official/component.css">
+   <link rel="stylesheet" href="../../../resources/css/official/header.css">
+   <!-- <link rel="stylesheet" href="../../../resources/css/official/index.css"> -->
+   <link rel="stylesheet" href="../../../resources/css/official/content.css">
+   <link rel="stylesheet" href="../../../resources/css/official/explore.css">
+   <link rel="stylesheet" href="../../../resources/css/official/upload_form.css">
+   <style>
+      .title-hide {
+         position: absolute;
+         visibility: hidden;
+      }
+   </style>
+</head>
+
+<body>
+   <div class="flex-holder">
+      <div class="head-holder">
+            <div class="logo-holder">
+               <span class="logo">铁路站台</span>
+            </div>
+         <ul class="nav-holder">
+            <span class="nav-items">
+               <span id="sub-holder" style="position: relative">
+                  <li class="nav-item nd-btn" id="sub-btn">探索</li>
+                  <span class="panel" id="sub-panel">
+                     <li class="sub-item"><a href="/common">事物们</a></li>
+                     <li class="sub-item"><a href="/nature">生命们</a></li>
+                     <li class="sub-item"><a href="/family">我们</a></li>
+                     <li class="sub-item"><a href="/station">铁路车站</a></li>
+                     <li class="sub-item"><a href="/wallpaper">墙纸</a></li>
+                     <li class="sub-item"><a href="/work">虚拟作品</a></li>
+                  </span>
+               </span>
+               <li class="nav-item"><a style="color: rgba(255, 255, 255, 0.233);">|</a></li>
+               <li class="nav-item"><a href="">结点</a></li>
+               <li class="nav-item"><a href="">参与者</a></li>
+            </span>
+            <span class="nav-actions">
+               <li class="nav-member">
+                  <span id="member" class="nd-btn"></span>
+                  <div class="action-panel member-panel">
+                     <div class="panel-box btn-box">
+                        <button id="quit-send" class="button">登出</button>
+                     </div>
+                  </div>
+               </li>
+               <li class="nav-define">
+                  <input class="definition-text letter" type="text" placeholder="探索">
+                  <span class="definition-button"><svg class="svg-search" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24">
+                        <g data-name="Layer 2">
+                           <g data-name="search">
+                              <rect width="24" height="24" opacity="0" />
+                              <path
+                                 d="M20.71 19.29l-3.4-3.39A7.92 7.92 0 0 0 19 11a8 8 0 1 0-8 8 7.92 7.92 0 0 0 4.9-1.69l3.39 3.4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42zM5 11a6 6 0 1 1 6 6 6 6 0 0 1-6-6z" />
+                           </g>
+                        </g>
+                     </svg></span>
+               </li>
+            </span>
+         </ul>
+         <!-- <span class="switch-side"><span class="switch-side-assist"></span></span> -->
+      </div>
+      <div id="container">
+         <div id="side-bar">
+            <div id="path-content">
+               <ul class="path-item left-visible" id="country"><li class="country-item border-top" data-i="0">中国</li></ul>
+               <ul class="path-item" id="province"><li class="province-item border-top">江苏省</li></ul>
+               <ul class="path-item" id="city"><li class="city-item border-top">南通市</li></ul>
+               <ul class="path-item" id="area"><li class="area-item border-top">通州区</li></ul>
+               <ul class="path-item" id="station"><li class="station-item border-top">南通站</li></ul>
+            </div>
+            <ul id="path-map"></ul>
+         </div>
+         <div class="content-holder" id="project-list"></div>
+      </div>
+      <div id="write-holder">
+         <div id="write-panel">
+            <div class="cell" style="margin-top: 4px; border-top: none;">选择项目（图片或声音），继续发布步骤之前请再次确认：<strong><br />你的项目内容不应该和该描述下的其它项目相似，否则请附着相似项目 - 记录故事；<br />如果乐意为项目提供位置信息，那么在你发布之前，不应该存在同一位置的其它项目，否则请附着该项目 - 记录时光轴。</strong></div>
+            <div id="preview-holder">
+               <div id="colorful-boxes">
+                  <div class="cbox-outer"><div class="cbox-inner box-color1">项目选择</div></div>
+                  <div class="cbox-outer"><div class="cbox-inner box-color2">项目选择</div></div>
+                  <div class="cbox-outer"><div class="cbox-inner box-color3">项目选择</div></div>
+                  <div class="cbox-outer"><div class="cbox-inner box-color4">项目选择</div></div>
+                  <div class="cbox-outer"><div class="cbox-inner box-color5">项目选择</div></div>
+               </div>
+               <span class="btn-remove"></span>
+               <input type="file" accept="image/*, audio/*" id="file">
+            </div>
+            <div class="cell">填写位置信息，探索附近项目，开启时光轴。<span class="note-trigger"></span><span class="note">忽略填写位置信息的项目可以在将来补充位置信息，补充时请提供正确的位置信息和对应的未来项目。</span></div>
+            <div class="project-geo">
+               <span class="map" id="map"></span>
+               <span class="geoform-panel">
+                  <input id="longitude" type="text" placeholder="Longitude">
+                  <input id="latitude" type="text" placeholder="Latitude">
+                  <button id="control" class="button">查看定位</button>
+               </span>
+            </div>
+            <div class="cell">描述项目，保持简单准确。</div>
+            <span class="project-letter">
+               <textarea id="letter" title="留言输入框" name=""></textarea>
+            </span>
+            <div class="cell">天气怎样？在做什么？心情如何？</div>
+            <span class="project-state">
+               <span class="red">
+                  <li class="state-item" data-i="1">A</li>
+                  <li class="state-item" data-i="2">B</li>
+                  <li class="state-item current-state" data-i="3">C</li>
+                  <li class="state-item" data-i="4">D</li>
+                  <li class="state-item" data-i="5">E</li>
+               </span>
+               <span class="green">
+                  <li class="state-item" data-i="1">A</li>
+                  <li class="state-item" data-i="2">B</li>
+                  <li class="state-item current-state" data-i="3">C</li>
+                  <li class="state-item" data-i="4">D</li>
+                  <li class="state-item" data-i="5">E</li>
+               </span>
+               <span class="blue">
+                  <li class="state-item" data-i="1">A</li>
+                  <li class="state-item" data-i="2">B</li>
+                  <li class="state-item current-state" data-i="3">C</li>
+                  <li class="state-item" data-i="4">D</li>
+                  <li class="state-item" data-i="5">E</li>
+               </span>
+            </span>
+            <span class="project-action">
+               <li class="button button-upload" id="publish">记录</li>
+               <li class="button button-preview" id="preview">预览</li>
+               <li class="button button-cancel" id="cancel">关闭</li>
+            </span>
+         </div>
+      </div>
+   </div>
+</body>
+<script src="../../../resources/js/class.js"></script>
+<script src="../../../resources/js/official/util.js"></script>
+<script src="../../../resources/js/official/stationComp.js"></script>
+<script src="../../../resources/js/official/typeExplore.js"></script>
+<script>
+var hello = new loadBody('D');
+</script>
+</html>

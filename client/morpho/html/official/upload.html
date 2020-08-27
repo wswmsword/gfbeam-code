@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" class="white">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+   <title>核心条目</title>
+   <link rel="stylesheet" href="/resources/css/official/reset.css">
+   <link rel="stylesheet" href="/resources/css/official/header.css">
+   <link rel="stylesheet" href="/resources/css/official/developing.css">
+   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+   <style>
+      .head-holder {
+         position: fixed;
+         display: flex;
+         /* justify-content: space-between; */
+         width: 100%;
+         top: 0;
+         background-color: transparent;
+         z-index: 1;
+         border-bottom: none;
+      }
+      .logo-holder {
+         background-color: transparent;
+         color: rgb(0, 230, 64);
+         font-size: 36px;
+         padding: 12px 28px;
+         /* color:  */
+      }
+      .logo {
+         vertical-align: middle;
+      }
+      .nav-holder {
+         border-bottom: none;
+      }
+      #title {
+         font-size: 36px;
+         margin-bottom: 18px;
+         margin-top: 21px;
+         padding: 0 18px;
+         line-height: 1;
+         text-shadow: 2px 1px 0 white;;
+      }
+   </style>
+   <link rel="stylesheet" href="/resources/css/official/component.css">
+   <link rel="stylesheet" href="/resources/css/official/upload.css">
+   <link rel="stylesheet" href="/resources/css/official/upload_form.css">
+   <!-- <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' /> -->
+
+</head>
+<body>
+<div class="head-holder">
+   <div class="logo-holder">
+      <span class="logo">GFBeam</span>
+   </div>
+</div>
+<div class="upload-holder">
+   <div id="title">标题</div>
+   <div class="cell">点击下方区域选择项目（图片或声音）；<br />核心条目希望自己所表达的主题是独一无二的，因此假设即将发布的是一则小消息，请尝试记录<strong>故事</strong>（条目）。&gt;&gt;&gt;<a id="repo-potal" href="/story/nodewrite/">传送门</a></div>
+   <div id="preview-holder">
+      <div id="colorful-boxes">
+         <div class="cbox-outer"><div class="cbox-inner box-color1">项目选择</div></div>
+         <div class="cbox-outer"><div class="cbox-inner box-color2">项目选择</div></div>
+         <div class="cbox-outer"><div class="cbox-inner box-color3">项目选择</div></div>
+         <div class="cbox-outer"><div class="cbox-inner box-color4">项目选择</div></div>
+         <div class="cbox-outer"><div class="cbox-inner box-color5">项目选择</div></div>
+      </div>
+      <span class="btn-remove"></span>
+      <input type="file" accept="image/*, audio/*" id="file">
+   </div>
+   <div class="cell">公布位置信息，为探索留下踪迹，开启<strong>光阴</strong>，参与进来的成员将共同构建这条能够“时间旅行”的条目。<span class="note-trigger"></span><span class="note">忽略后可以在未来补充，应用同样提供了成员“有宝藏！”的按钮来向核心发布者请求公布位置；关于生态生命的条目不适合公布位置信息。</span><button id="ignore" class="button">暂时忽略定位</button></div>
+   <div class="project-geo">
+      <span class="map" id="map"></span>
+      <span class="geoform-panel">
+         <input id="longitude" type="text" placeholder="经度 Longitude" title="经度">
+         <input id="latitude" type="text" placeholder="纬度 Latitude" title="纬度">
+         <button id="control" class="button developing">测试定位</button>
+      </span>
+      <div id="ignore-ceiling"></div>
+   </div>
+   <div class="cell">正文。</div>
+   <span class="project-letter">
+      <textarea id="letter" title="留言输入框" name=""></textarea>
+   </span>
+   <div class="cell">记一记现在的天气、动作、心情。</div>
+   <span class="project-state">
+      <span class="red">
+         <li class="state-item" data-i="1">A</li>
+         <li class="state-item" data-i="2">B</li>
+         <li class="state-item current-state" data-i="3">C</li>
+         <li class="state-item" data-i="4">D</li>
+         <li class="state-item" data-i="5">E</li>
+      </span>
+      <span class="green">
+         <li class="state-item" data-i="1">A</li>
+         <li class="state-item" data-i="2">B</li>
+         <li class="state-item current-state" data-i="3">C</li>
+         <li class="state-item" data-i="4">D</li>
+         <li class="state-item" data-i="5">E</li>
+      </span>
+      <span class="blue">
+         <li class="state-item" data-i="1">A</li>
+         <li class="state-item" data-i="2">B</li>
+         <li class="state-item current-state" data-i="3">C</li>
+         <li class="state-item" data-i="4">D</li>
+         <li class="state-item" data-i="5">E</li>
+      </span>
+   </span>
+   <span class="project-action">
+      <li class="button button-upload" id="publish">发布</li>
+      <li class="button button-preview">预览</li>
+   </span>
+   <div id="upform-ceiling" class="hidden"><span>正在上传中，请等待 ；）</span></div>
+</div>
+
+</body>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js' async="true"></script>
+<script src="/resources/js/official/util.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/upyun/dist/upyun.js"></script>
+<script src="/resources/js/official/browser-md5-file.js"></script>
+<script src="/resources/js/official/xss.min.js"></script>
+<script src="/resources/js/official/upload.js"></script>
+</html>
